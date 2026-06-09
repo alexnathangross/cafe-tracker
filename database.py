@@ -18,7 +18,8 @@ def create_transactions_table():
                     type TEXT,
                     UNIQUE(posting_date, description, amount, type)
                 )
-            """)
+            """)    # UNIQUE(...) to revent duplicate imports when 
+                    # the same CSV is processed multiple times
 
     conn.commit()
     conn.close()
@@ -62,6 +63,8 @@ def get_transaction_count():
 def get_all_transactions():
     conn = connect_db()
 
+    # Convert SQLite query results into a DataFrame
+    # so existing analytics functions can be reused
     df = pd.read_sql_query("SELECT * FROM transactions", conn)
 
     conn.close()
