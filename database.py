@@ -18,7 +18,7 @@ def create_transactions_table():
                     type TEXT,
                     UNIQUE(posting_date, description, amount, type)
                 )
-            """)    # UNIQUE(...) to revent duplicate imports when 
+            """)    # UNIQUE(...) to prevent duplicate imports when 
                     # the same CSV is processed multiple times
 
     conn.commit()
